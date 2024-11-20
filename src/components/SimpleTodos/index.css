@@ -8,8 +8,33 @@
   background-size: cover;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+.add-btn{
+  height:40px;
+  width:100px;
+  background-color:#ffffff;
+  border-style:solid;
+  border-width:0;
+  font-weight:bold;
+  color:#ffc2a0;
+  font-size:30px;
+  border-radius:5px;
+  margin:5px;
+}
+.input-container {
+  display: flex;
+  justify-content: center;
+}
+.input-feild {
+  height: 40px;
+  width: 400px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 0;
+  border-radius: 5px;
+  margin:5px;
 }
 .card-container {
   background-color: #ffffff;

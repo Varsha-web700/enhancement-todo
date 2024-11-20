@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import {v4} from 'uuid'
+
 import TodoItem from '../TodoItem'
 
 import './index.css'
@@ -41,29 +43,53 @@ const initialTodosList = [
 
 // Write your code here
 class SimpleTodos extends Component {
-  state = {todosList: initialTodosList}
+  state = {todosList: initialTodosList, input: ''}
+
   deleteTodo = id => {
     const {todosList} = this.state
     const updatedTodoList = todosList.filter(each => each.id !== id)
     this.setState({todosList: updatedTodoList})
   }
+
+  input = event => {
+    this.setState({input: event.target.value})
+  }
+
+  onClickAdd = () => {
+    const {input} = this.state
+    const newTodo = {
+      id: v4(),
+      title: input,
+    }
+    this.setState(prevState => ({todosList: [...prevState.todosList, newTodo]}))
+  }
+
   render() {
-    const {todosList} = this.state
+    const {todosList, input} = this.state
     return (
       <div className="bg-container">
+        <div className="input-container">
+          <input
+            onChange={this.input}
+            type="search"
+            className="input-feild"
+            value={input}
+          />
+          <button type = 'button' className="add-btn" onClick={this.onClickAdd}>
+            Add
+          </button>
+        </div>
         <div className="card-container">
           <h1 className="heading">Simple Todos</h1>
           <div className="name-icon-container">
             <ul>
-              {todosList.map(each => {
-                return (
-                  <TodoItem
-                    itemsList={each}
-                    deleteTodo={this.deleteTodo}
-                    key={each.id}
-                  />
-                )
-              })}
+              {todosList.map(each => (
+                <TodoItem
+                  itemsList={each}
+                  deleteTodo={this.deleteTodo}
+                  key={each.id}
+                />
+              ))}
             </ul>
           </div>
         </div>
